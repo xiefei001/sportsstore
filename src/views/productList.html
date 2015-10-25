@@ -1,4 +1,5 @@
-<div class="panel panel-default row" ng-controller="ProductListCtrl as productListCtrl" ng-hide="sportsStoreCtrl.data.error">
+<div class="panel panel-default row" ng-controller="ProductListCtrl as productListCtrl"
+     ng-hide="sportsStoreCtrl.data.error">
     <div class="col-xs-3">
         <a ng-click="productListCtrl.selectCategory()" class="btn btn-block btn-default btn-lg">Home</a>
         <a ng-repeat=" item in sportsStoreCtrl.data.products | orderBy: 'category' | unique: 'category'"
@@ -16,7 +17,9 @@
                         {{item.price | currency}}
                     </span>
             </h3>
-
+            <button ng-click="productListCtrl.addProductToCart(item)" class="btn btn-success pull-right">
+                Add to cart
+            </button>
             <span class="lead">{{item.description}}</span>
         </div>
         <div class="pull-right btn-group">

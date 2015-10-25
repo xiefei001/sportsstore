@@ -6,21 +6,45 @@
     <link href="../node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet"/>
     <script src="../node_modules/angular/angular.js"></script>
     <script>
-        angular.module("sportsStore", ["customFilters"]);
+        angular.module("sportsStore", ["customFilters", "cart", "ngRoute"])
+                .config(["$routeProvider", function ($routeProvider) {
+
+                    $routeProvider.when("/complete", {
+                        templateUrl: "/sportsstore/src/views/thankYou.html"
+                    });
+                    $routeProvider.when("/placeorder", {
+                        templateUrl: "/sportsstore/src/views/placeOrder.html"
+                    });
+
+                    $routeProvider.when("/checkout", {
+                        templateUrl: "/sportsstore/src/views/checkoutSummary.html"
+                    });
+
+                    $routeProvider.when("/products", {
+                        templateUrl: "/sportsstore/src/views/productList.html"
+                    });
+                    $routeProvider.otherwise({
+                        templateUrl:"/sportsstore/src/views/productList.html"
+                    });
+                }]);
     </script>
     <script src="controllers/sportsStore.js"></script>
     <script src="filters/customFilters.js"></script>
     <script src="controllers/productListControllers.js"></script>
+    <script src="components/cart/cart.js"></script>
+    <script src="../node_modules/angular-route/angular-route.js"></script>
+    <script src="controllers/checkoutController.js"></script>
 </head>
 <body ng-controller="SportsStoreCtrl as sportsStoreCtrl">
-    <div class="navbar navbar-inverse">
-        <a class="navbar-brand" href="#">SPORTS STORE</a>
-    </div>
-    <div class="alert alert-danger" ng-show="sportsStoreCtrl.data.error">
-        Error ({{sportsStoreCtrl.data.error.status}}). The product data was not loaded.
-        <a href="app.html" class="alert-link">Click here to try again</a>
-    </div>
-    <ng-include src="'views/productList.html'"></ng-include>
+<div class="navbar navbar-inverse">
+    <a class="navbar-brand" href="#">SPORTS STORE</a>
+    <cart-summary></cart-summary>
+</div>
+<div class="alert alert-danger" ng-show="sportsStoreCtrl.data.error">
+    Error ({{sportsStoreCtrl.data.error.status}}). The product data was not loaded.
+    <a href="app.html" class="alert-link">Click here to try again</a>
+</div>
+<ng-view></ng-view>
 
 </body>
 </html>

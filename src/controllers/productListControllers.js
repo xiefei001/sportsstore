@@ -1,8 +1,8 @@
 angular.module("sportsStore")
     .constant("productListActiveClass", "btn-primary")
     .constant("productListPageCount", 3)
-    .controller("ProductListCtrl", ["productListActiveClass", "productListPageCount",
-        function (productListActiveClass, productListPageCount) {
+    .controller("ProductListCtrl", ["productListActiveClass", "productListPageCount", "cartFactory",
+        function (productListActiveClass, productListPageCount, cartFactory) {
             var selectedCategory = null;
             var selectedPage = 1;
             var pageSize = productListPageCount;
@@ -22,18 +22,22 @@ angular.module("sportsStore")
 
             this.selectPage = function (newPage) {
                 selectedPage = newPage;
-            }
+            };
 
             this.getselectedPage = function () {
                 return selectedPage;
-            }
+            };
 
             this.getPageSize = function () {
                 return pageSize;
-            }
+            };
 
             this.getPageClass = function (page) {
                 return selectedPage == page ? productListActiveClass : "";
-            }
+            };
+
+            this.addProductToCart = function (product) {
+                cartFactory.addProduct(product.id, product.name, product.price);
+            };
 
         }]);

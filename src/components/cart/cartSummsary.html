@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<style>
+    .navbar-right {
+        float: right !important;
+        margin-right: 5px;
+    }
 
-</body>
-</html>
+    .navbar-text {
+        margin-right: 10px;
+    }
+</style>
+<div class="navbar-right">
+    <div class="navbar-text">
+        <b>Your cart:</b>
+        {{ctrl.itemCount()}} item(s),
+        {{ctrl.total() | currency}}
+    </div>
+    <a href="#/checkout" class="btn btn-default navbar-btn">Checkout</a>
+</div>
