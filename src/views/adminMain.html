@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="panel panel-default row" ng-controller="MainCtrl as mainCtrl">
+    <div class="col-xs-3 panel-body">
+        <a ng-repeat="item in mainCtrl.screens" class="btn btn-block btn-default"
+           ng-class="{'btn-primary': item == mainCtrl.current }" ng-click="mainCtrl.setScreen($index)">
+            {{item}}
+        </a>
+    </div>
+    <div class="col-xs-8 panel-body" >
+        <div ng-include="mainCtrl.getScreen()"></div>
+    </div>
+</div>
